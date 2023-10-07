@@ -5,7 +5,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const getUser = (token: string) =>
-  fetch("http://localhost:3000/api/auth/user", {
+  fetch(`${process.env.API_URL}/auth/user`, {
     method: "POST",
 
     headers: {

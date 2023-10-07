@@ -16,7 +16,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useTokenStore } from "@/store/userAuth";
 const getEmail = async (id: string) =>
-  axios.get("http://localhost:3000/api/auth/verify", {
+  axios.get(`${process.env.API_URL}/auth/verify`, {
     params: { id },
   });
 const Page = () => {
@@ -35,7 +35,7 @@ const Page = () => {
   const resendEmail = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/resend",
+        `${process.env.API_URL}/auth/resend`,
         {},
         { params: { id } }
       );
@@ -49,7 +49,7 @@ const Page = () => {
     const num3 = number3.current?.value;
     const num4 = number4.current?.value;
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/verify", {
+      const res = await axios.post(`${process.env.API_URL}/auth/verify`, {
         otp: `${num1}${num2}${num3}${num4}`,
         id,
       });

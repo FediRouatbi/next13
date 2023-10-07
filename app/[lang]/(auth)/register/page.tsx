@@ -44,7 +44,7 @@ export default function DemoCreateAccount() {
   const submit = async (data: ValidationSchema) => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/auth", {
+      const res = await fetch(`${process.env.API_URL}/auth`, {
         method: "POST",
         body: JSON.stringify(data),
       });
