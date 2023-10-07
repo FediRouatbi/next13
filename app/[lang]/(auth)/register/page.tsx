@@ -40,7 +40,7 @@ export default function DemoCreateAccount() {
     resolver: zodResolver(schema),
     defaultValues: { confirmPassword: "", email: "", password: "" },
   });
-  console.log(process.env.NEXT_PUBLIC_BASE_URL);
+  console.log(process.env.BASE_URL);
 
   const submit = async (data: ValidationSchema) => {
     setLoading(true);
