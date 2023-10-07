@@ -16,7 +16,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useTokenStore } from "@/store/userAuth";
 const getEmail = async (id: string) =>
-  axios.get(`${process.env.API_URL}/auth/verify`, {
+  axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify`, {
     params: { id },
   });
 const Page = () => {
@@ -35,7 +35,7 @@ const Page = () => {
   const resendEmail = async () => {
     try {
       const res = await axios.post(
-        `${process.env.API_URL}/auth/resend`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/resend`,
         {},
         { params: { id } }
       );
@@ -49,10 +49,13 @@ const Page = () => {
     const num3 = number3.current?.value;
     const num4 = number4.current?.value;
     try {
-      const res = await axios.post(`${process.env.API_URL}/auth/verify`, {
-        otp: `${num1}${num2}${num3}${num4}`,
-        id,
-      });
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify`,
+        {
+          otp: `${num1}${num2}${num3}${num4}`,
+          id,
+        }
+      );
       setToken(res.data.token);
 
       router.push(`/`);

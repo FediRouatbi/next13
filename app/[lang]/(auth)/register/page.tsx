@@ -40,11 +40,12 @@ export default function DemoCreateAccount() {
     resolver: zodResolver(schema),
     defaultValues: { confirmPassword: "", email: "", password: "" },
   });
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
   const submit = async (data: ValidationSchema) => {
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.API_URL}/auth`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth`, {
         method: "POST",
         body: JSON.stringify(data),
       });
