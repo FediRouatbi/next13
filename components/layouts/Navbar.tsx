@@ -12,8 +12,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Input } from "@/components/ui/input";
-import { Search, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -27,6 +26,7 @@ import {
 import { useTokenStore, useUserStore } from "@/store/userAuth";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/themeToogle";
+import { SelectLanguage } from "@/components/ui/languageToogle";
 
 type Categorie = {
   id: string;
@@ -94,7 +94,7 @@ export default function Navbar({ categories }: { categories: Categorie[] }) {
           </NavigationMenuLink>
         </NavigationMenuList>
       </NavigationMenu>
-      <div className="ml-auto mr-24">
+      <div className="ml-auto mr-24 flex items-center gap-2">
         {user && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -141,6 +141,7 @@ export default function Navbar({ categories }: { categories: Categorie[] }) {
           </DropdownMenu>
         )}
         <ModeToggle />
+        <SelectLanguage />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 "use client";
 import Eye from "@/lib/svg/eye";
-
-export const Svgs = { Eye };
+import En from "@/lib/svg/en";
+import Fr from "@/lib/svg/fr";
+export const Svgs = { Eye, En, Fr };
