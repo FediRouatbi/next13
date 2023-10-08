@@ -45,7 +45,7 @@ export default function DemoCreateAccount() {
   const submit = async (data: ValidationSchema) => {
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth`, {
+      const res = await fetch(`${process.env.BASE_URL}/auth`, {
         method: "POST",
         body: JSON.stringify(data),
       });
