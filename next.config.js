@@ -4,6 +4,7 @@ const nextConfig = {
   env: {
     BASE_URL: process.env.BASE_URL,
   },
+  images: { domains: ["tailwindui.com"] },
 };
 
 module.exports = nextConfig;

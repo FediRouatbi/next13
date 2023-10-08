@@ -26,45 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTokenStore, useUserStore } from "@/store/userAuth";
 import Link from "next/link";
-import { db } from "@/util/db";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
+import { ModeToggle } from "@/components/ui/themeToogle";
 
 type Categorie = {
   id: string;
@@ -74,13 +36,13 @@ export default function Navbar({ categories }: { categories: Categorie[] }) {
   const { user, clearUser } = useUserStore();
   const { clearToken } = useTokenStore();
   return (
-    <div className="sticky flex items-center gap-10 bg-[#4c6ef5] shadow-md ">
-      <form className="flex items-center px-2 py-1 ml-10 bg-gray-100 rounded-md group focus-within:bg-white hover:bg-white active:bg-white ">
+    <div className="sticky top-0 z-50 bg-background flex items-center gap-10  shadow-md ">
+      <form className="flex items-center px-2 py-1 ml-10 bg-secondary rounded-md group focus-within:outline outline-2  focus-within:bg-background active::bg-background ">
         <input className="bg-transparent w-fit h-fit focus-visible:outline-none" />
         <button>
           <SearchIcon
             size={30}
-            className="p-1 transition-all bg-gray-100 rounded-md opacity-75 group-hover:bg-gray-300 group-focus-within:bg-gray-300"
+            className="p-1 transition-all   rounded-md opacity-75 bg-muted"
           />
         </button>
       </form>
@@ -88,8 +50,8 @@ export default function Navbar({ categories }: { categories: Categorie[] }) {
         <NavigationMenuList className="gap-5 ">
           <NavigationMenuItem>
             <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <NavigationMenuContent className="z-[100]">
+              <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] z-[100]">
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <a
@@ -127,55 +89,59 @@ export default function Navbar({ categories }: { categories: Categorie[] }) {
               <Link href={`/fr/${el.name}`}>{el.name}</Link>
             </NavigationMenuLink>
           ))}
-
           <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
             <Link href="/">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuList>
       </NavigationMenu>
+      <div className="ml-auto mr-24">
+        {user && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar className=" cursor-pointer">
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56 right-5" align="end">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile">Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/settings">Settings</Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>Team</DropdownMenuItem>
 
-      {user && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="ml-auto mr-24 cursor-pointer">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 right-5" align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <Link href="/profile">Profile</Link>
+                <DropdownMenuItem>New Team</DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>GitHub</DropdownMenuItem>
+              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuItem disabled>API</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => {
+                  clearUser();
+                  clearToken();
+                }}
+              >
+                Log out
               </DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/settings">Settings</Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-
-              <DropdownMenuItem>New Team</DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>GitHub</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuItem disabled>API</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => {
-                clearUser();
-                clearToken();
-              }}
-            >
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+        <ModeToggle />
+      </div>
     </div>
   );
 }

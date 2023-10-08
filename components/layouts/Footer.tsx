@@ -78,10 +78,10 @@ const Footer = () => {
                   type="text"
                   id="footer-field"
                   name="footer-field"
-                  className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:bg-transparent focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500"
+                  className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:bg-transparent focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
-              <button className="inline-flex flex-shrink-0 px-6 py-2 text-white bg-indigo-500 border-0 rounded lg:mt-2 xl:mt-0 focus:outline-none hover:bg-indigo-600">
+              <button className="inline-flex flex-shrink-0 px-6 py-2 text-white bg-primary border-0 rounded lg:mt-2 xl:mt-0 focus:outline-none hover:bg-primary">
                 Button
               </button>
             </div>

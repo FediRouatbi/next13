@@ -9,7 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-const page = () => {
+import { getDictionary } from "@/languages/dictionaries";
+type Props = {
+  params: { lang: "fr" | "en" };
+};
+const page = async ({ params: { lang } }: Props) => {
+  const dict = await getDictionary(lang);
+
   return (
     <section className="mx-auto my-7 max-w-7xl">
       <div className="flex items-center justify-end gap-2 mb-5 ">
@@ -26,14 +32,14 @@ const page = () => {
         </Select>
       </div>
       <div className="relative flex items-start gap-5">
-        <div className="sticky top-7">
+        <div className="sticky top-24">
           <div className="flex items-center space-x-2">
             <Checkbox id="terms" />
             <label
               htmlFor="terms"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              Accept terms and conditions
+              {dict.hello}
             </label>
           </div>
         </div>
