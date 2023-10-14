@@ -4,7 +4,7 @@ const nextConfig = {
   env: {
     BASE_URL: process.env.BASE_URL,
   },
-  images: { domains: ["tailwindui.com"] },
+  images: { domains: ["tailwindui.com", "files.edgestore.dev"] },
 };
 
 module.exports = nextConfig;

@@ -32,7 +32,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     });
 
     return (
-      <>
+      <div style={{ width: props?.width }}>
         <Label htmlFor={id} className={`${error?.message && "text-red-400"}`}>
           {label}
         </Label>
@@ -53,7 +53,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {endAdornment ?? null}
         </div>
         <p className="text-red-400">{error?.message}</p>
-      </>
+      </div>
     );
   }
 );

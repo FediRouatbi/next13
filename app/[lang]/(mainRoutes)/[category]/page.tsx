@@ -10,14 +10,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getDictionary } from "@/languages/dictionaries";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 type Props = {
-  params: { lang: "fr" | "en" };
+  params: { lang: "fr" | "en"; category: string };
 };
-const page = async ({ params: { lang } }: Props) => {
+const page = async ({ params: { lang, category } }: Props) => {
   const dict = await getDictionary(lang);
 
   return (
-    <section className="mx-auto my-7 max-w-7xl">
+    <section className="mx-auto my-7 max-w-7xl px-4">
+      <div className="flex justify-end py-7">
+        <Link href={`/${lang}/${category}/add`}>
+          <Button>create Post </Button>
+        </Link>
+      </div>
       <div className="flex items-center justify-end gap-2 mb-5 ">
         <Select>
           <SelectTrigger className="w-[180px]">

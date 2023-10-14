@@ -4,7 +4,7 @@ import React from "react";
 
 const CardItem = () => {
   return (
-    <div className="border-b border-r cursor-pointer justify-self-center p-7 group">
+    <div className="border-b border-r cursor-pointer justify-self-center p-7 group w-full">
       <div className="overflow-hidden relative  transition-all rounded-md aspect-square group-hover:opacity-80 group-hover:scale-105">
         <Image
           src="https://tailwindui.com/img/ecommerce-images/category-page-05-image-card-01.jpg"

@@ -27,6 +27,7 @@ import { useTokenStore, useUserStore } from "@/store/userAuth";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/themeToogle";
 import { SelectLanguage } from "@/components/ui/languageToogle";
+import { useParams } from "next/navigation";
 
 type Categorie = {
   id: string;
@@ -35,8 +36,11 @@ type Categorie = {
 export default function Navbar({ categories }: { categories: Categorie[] }) {
   const { user, clearUser } = useUserStore();
   const { clearToken } = useTokenStore();
+  const { lang } = useParams();
+  console.log(lang);
+
   return (
-    <div className="sticky top-0 z-50 bg-background flex items-center gap-10  shadow-md ">
+    <div className="sticky top-0 z-50 bg-background flex flex-wrap items-center gap-10  shadow-md ">
       <form className="flex items-center px-2 py-1 ml-10 bg-secondary rounded-md group focus-within:outline outline-2  focus-within:bg-background active::bg-background ">
         <input className="bg-transparent w-fit h-fit focus-visible:outline-none" />
         <button>
@@ -86,11 +90,13 @@ export default function Navbar({ categories }: { categories: Categorie[] }) {
               className={navigationMenuTriggerStyle()}
               asChild
             >
-              <Link href={`/fr/${el.name}`}>{el.name}</Link>
+              <Link href={`/${lang}/${el.name}`} locale="en">
+                {el.name}
+              </Link>
             </NavigationMenuLink>
           ))}
           <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-            <Link href="/">Home</Link>
+            <Link href={`/${lang}`}>Home</Link>
           </NavigationMenuLink>
         </NavigationMenuList>
       </NavigationMenu>
@@ -111,11 +117,11 @@ export default function Navbar({ categories }: { categories: Categorie[] }) {
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
-                  <Link href="/profile">Profile</Link>
+                  <Link href={`/${lang}/profile`}>Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>Billing</DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/settings">Settings</Link>
+                  <Link href={`/${lang}/settings`}>Settings</Link>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
